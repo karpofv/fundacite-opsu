@@ -227,7 +227,7 @@ if($editar == 1 and $nombre =="" and $codigo!=""){
                                     </form>
                                 </div>
                                 <div class="row">
-                                    <table class="table table-hover" id="plantel">
+                                    <table class="display font12" cellspacing="0" width="100%" id="plantel">
                                         <thead>
                                             <tr>
                                                 <td class="text-center"><strong>Código</strong></td>
@@ -310,13 +310,13 @@ if($editar == 1 and $nombre =="" and $codigo!=""){
             </div>
         </div>
     </div>
-    <script>
+    <script>        
         $('#plantel').DataTable({
             language: {
                 "url": "<?php echo $ruta_base;?>assets/js/Spanish.json"
-            }
-            , dom: 'Bfrtip'
-            , buttons: [
+            },
+            dom: 'Bfrtip',
+            buttons: [
                 {
                     extend: 'excelHtml5',
                     exportOptions: {
@@ -339,6 +339,9 @@ if($editar == 1 and $nombre =="" and $codigo!=""){
                     extend: 'colvis',
                     text: 'Columnas visibles'
                 }
-            ]
+            ],
+            scrollX: "true",
+            scrollY: "200px",
+            "scrollCollapse": true
         });
     </script>

@@ -17,6 +17,54 @@
 
     <script src="<?php echo $ruta_base;?>assets/js/jquery.min.js"></script>
 </head>
-
+<script type="text/javascript">
+        function leer(tipo,codigo){
+        if(tipo==1){
+            /*RENUNCIA*/
+            $.ajax({
+                type: 'POST',
+                url: 'accion.php',
+                ajaxSend: $('#page-content').html(cargando),
+                data: 'dmn=6&ver=2&noti='+codigo,
+                success: function(html) {
+                    $('#page-content').html(html);
+                },
+                error: function(xhr,msg,excep) {
+                    alert('Error Status ' + xhr.status + ': ' + msg + '/ ' + excep);
+                }
+            });
+        }
+        if(tipo==2){
+            /*eliminacion*/
+            $.ajax({
+                type: 'POST',
+                url: 'accion.php',
+                ajaxSend: $('#page-content').html(cargando),
+                data: 'dmn=4&ver=2&noti='+codigo,
+                success: function(html) {
+                    $('#page-content').html(html);
+                },
+                error: function(xhr,msg,excep) {
+                    alert('Error Status ' + xhr.status + ': ' + msg + '/ ' + excep);
+                }
+            });
+        }
+        if(tipo==3){
+            /*DESBLOQUEO*/
+            $.ajax({
+                type: 'POST',
+                url: 'accion.php',
+                ajaxSend: $('#page-content').html(cargando),
+                data: 'dmn=5&ver=2&noti='+codigo,
+                success: function(html) {
+                    $('#page-content').html(html);
+                },
+                error: function(xhr,msg,excep) {
+                    alert('Error Status ' + xhr.status + ': ' + msg + '/ ' + excep);
+                }
+            });
+        }
+    }
+</script>
 <body>
     <div id="wrapper">

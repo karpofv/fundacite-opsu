@@ -29,6 +29,12 @@ File: Main Css File
 /* ==============
   General
 ===================*/
+#notify>i {
+    padding-top: 7px;
+}
+.font12{
+    font-size: 12px!important;
+}
 body {
   background: #f5f5f5;
   font-family: 'PT Sans Caption', sans-serif;
@@ -1992,6 +1998,7 @@ File: Components
 }
 tbody {
   color: #797979;
+    font-size: 12px;
 }
 th {
   color: #666666;

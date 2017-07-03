@@ -1,56 +1,7 @@
-<script type="text/javascript">
-        function leer(tipo,codigo){
-        if(tipo==1){
-            /*RENUNCIA*/
-            $.ajax({
-                type: 'POST',
-                url: 'accion.php',
-                ajaxSend: $('#page-content').html(cargando),
-                data: 'dmn=6&ver=2&noti='+codigo,
-                success: function(html) {
-                    $('#page-content').html(html);
-                },
-                error: function(xhr,msg,excep) {
-                    alert('Error Status ' + xhr.status + ': ' + msg + '/ ' + excep);
-                }
-            });
-        }
-        if(tipo==2){
-            /*eliminacion*/
-            $.ajax({
-                type: 'POST',
-                url: 'accion.php',
-                ajaxSend: $('#page-content').html(cargando),
-                data: 'dmn=4&ver=2&noti='+codigo,
-                success: function(html) {
-                    $('#page-content').html(html);
-                },
-                error: function(xhr,msg,excep) {
-                    alert('Error Status ' + xhr.status + ': ' + msg + '/ ' + excep);
-                }
-            });
-        }
-        if(tipo==3){
-            /*DESBLOQUEO*/
-            $.ajax({
-                type: 'POST',
-                url: 'accion.php',
-                ajaxSend: $('#page-content').html(cargando),
-                data: 'dmn=5&ver=2&noti='+codigo,
-                success: function(html) {
-                    $('#page-content').html(html);
-                },
-                error: function(xhr,msg,excep) {
-                    alert('Error Status ' + xhr.status + ': ' + msg + '/ ' + excep);
-                }
-            });
-        }
-    }
-</script>
 <?php
     error_reporting(E_ALL);
-    ini_set('display_errors', true);
-    ini_set('display_startup_errors', true);
+    ini_set('display_errors', false);
+    ini_set('display_startup_errors', false);
     require('../includes/conf/auth.php');
     $nivel_acceso='Empleado';
     if ($nivel_acceso!=$_SESSION['usuario_nivel']) {
@@ -169,7 +120,7 @@
     }
 if($_SESSION['usuario_perfil']==1){
     $numnotify = 0;
-    $consulnuevos = paraTodos::arrayConsulta("*", "rsni", "reg_notifi=0");
+    $consulnuevos = paraTodos::arrayConsulta("*", "rsni", "reg_notifi=0 and reg_status=1");
     foreach($consulnuevos as $nuevos){
         if($nuevos[reg_caso]=='DESBLOQUEO'){
             $tipo = 3;
@@ -178,18 +129,19 @@ if($_SESSION['usuario_perfil']==1){
         }
         $notificacion .="<li class='linotify'><a href='javascript:void(0)' onclick='leer($tipo,$nuevos[reg_codigo]);'><i class='fa fa-bell'></i> Nuevo $nuevos[reg_caso]: $nuevos[reg_cedula]</a><li>";
     }
-    $consulnuevos = paraTodos::arrayConsulta("*", "renuncia", "ren_notifi=0");
+    $consulnuevos = paraTodos::arrayConsulta("*", "renuncia", "ren_notifi=0 and reg_status=1");
     foreach($consulnuevos as $nuevos){
         $notificacion .="<li class='linotify'><a href='javascript:void(0)' onclick='leer(1,$nuevos[ren_codigo]);'><i class='fa fa-bell'></i> Nueva RENUNCIA: $nuevos[ren_cedula]</a><li>";
     }
-    $consulnuevos = paraTodos::arrayConsultanum("*", "rsni", "reg_notifi=0");
+    $consulnuevos = paraTodos::arrayConsultanum("*", "rsni", "reg_notifi=0 and reg_status=1");
     $numnotify = $consulnuevos;
-    $consulnuevos = paraTodos::arrayConsultanum("*", "renuncia", "ren_notifi=0");    
+    $consulnuevos = paraTodos::arrayConsultanum("*", "renuncia", "ren_notifi=0 and reg_status=1");    
     $numnotify     = $numnotify + $consulnuevos;
     if($numnotify>0){
         $colorback ="green";
     } else {
         $colorback = "transparent";
+        $notificacion ="<li class='linotify'>No hay nuevas notificaciones<li>";
     }
 }
     if ($conexf!='') {

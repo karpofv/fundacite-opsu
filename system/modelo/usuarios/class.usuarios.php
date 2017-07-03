@@ -8,7 +8,7 @@
     public function registrarUsuario($cedula,$usuario,$contrasena,$tipo,$registro){
       $conexion = new Conexion;
       $conectar = $conexion->obtenerConexionMy();
-      $sql = "INSERT INTO usuarios (Cedula, Usuario, contrasena, Tipo, Nivel, Registro, Fecha) VALUES (:Cedula,:Usuario,:contrasena,:Tipo,:Nivel,:Registro,now())";
+      $sql = "INSERT INTO usuarios (Cedula, Usuario, contrasena, Tipo, Nivel, Fecha) VALUES (:Cedula,:Usuario,:contrasena,:Tipo,:Nivel,now())";
 
 
       $preparar = $conectar->prepare($sql);
@@ -17,7 +17,6 @@
       $preparar->bindValue(':contrasena',$contrasena);
       $preparar->bindValue(':Tipo',$tipo);
       $preparar->bindValue(':Nivel','3');
-      $preparar->bindValue(':Registro','1');
 
       if (!$preparar) {
         return "Error no pudo registrar el usuario";

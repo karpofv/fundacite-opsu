@@ -8,9 +8,11 @@
 <script type="text/javascript" src="<?php echo $ruta_base; ?>assets/plugins/datatables/buttons.html5.min.js"></script>
 <script type="text/javascript" src="<?php echo $ruta_base; ?>assets/plugins/datatables/buttons.colVis.min.js"></script>
 <?php
-
+$consulplantel= paraTodos::arrayConsulta("plant_codigo", "plantel", "plant_codzona=$_SESSION[ci]");
+foreach($consulplantel as $plantel){
+    $plantcodigo = $plantel[plant_codigo];
+}
 $codigo = $_POST[codigo];
-$plantcodigo = 2;
 $cedula = $_POST[reg_cedula];
 $nombre = $_POST[reg_nombres];
 $apellido = $_POST[reg_apellidos];
@@ -348,7 +350,7 @@ if($editar == 1 and $cedula =="" and $codigo!=""){
                         columns: ':visible'
                     },
                     customize: function (win) {
-                        $(win.document.body).css('font-size', '8pt').prepend('<div><h4 style="text-align:center">Clientes registrados</h4></div>');
+                        $(win.document.body).css('font-size', '8pt').prepend('<div><h4 style="text-align:center">Desbloqueos</h4></div>');
                         $(win.document.body).find('table').addClass('compact').css('font-size', 'inherit');
                     }
                 },

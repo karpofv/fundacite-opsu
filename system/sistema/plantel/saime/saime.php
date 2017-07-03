@@ -15,64 +15,48 @@ foreach($consulplantel as $plantel){
 $codigo = $_POST[codigo];
 $cedula = $_POST[cedula];      
 $nombre = $_POST[nombre];      
-$apellido = $_POST[apellido];      
-$nacional = $_POST[nacional];      
-$anual = $_POST[anual];      
-$universidad = $_POST[universidad];      
-$carrera = $_POST[carrera];      
-$motivo = $_POST[motivo];      
-$fecha = $_POST[fecha];      
-$cedrecp = $_POST[cedrecp];      
-$nomrecep = $_POST[nomrecep];      
-$estadorecep = $_POST[estrecep];      
-$aperecep = $_POST[aperecep];
+$apellido = $_POST[apellido];
+$fecnac = $_POST[fecnac];
+$sexo = $_POST[sexo];
+$tipo = $_POST[tipo];
+$correo = $_POST[correo];
+$telefono = $_POST[telefono];
 $eliminar = $_POST[eliminar];
 $editar = $_POST[editar];
 /*GUARDAR*/
 if ($editar=='1' and $cedula!="" and $codigo==""){
-    $consul = paraTodos::arrayConsultanum("ren_cedula", "renuncia", "ren_cedula=$cedula and ren_carrera='$carrera' and ren_universidad='$universidad'");
-    if ($consul>0){
-        paraTodos::showMsg("Este estudiante ya posee un caso de renuncia registrado bajo esta carrera en la universidad indicada", "alert-danger");
-    } else{
-        $fecha = paraTodos::deconvertDate($fecha);
-        paraTodos::arrayInserte("ren_fecreg, ren_plancodigo,ren_cedula, ren_nombre, ren_apellido, ren_nacional, ren_anual, ren_universidad, ren_carrera, ren_motivo, ren_fecha, ren_recepced, ren_recepnom, ren_recepape, ren_status, ren_recepestado", "renuncia", "current_date, '$plantcodigo', '$cedula', '$nombre', '$apellido', '$nacional', '$anual', '$universidad', '$carrera', '$motivo', '$fecha', '$cedrecp', '$nomrecep', '$aperecep', '1', $estadorecep");
-    }
+    $fecnac = paraTodos::deconvertDate($fecnac);  
+    paraTodos::arrayInserte("sai_plancodigo, sai_fecreg,sai_cedula, sai_nombre, sai_apellido, sai_fecnac, sai_tipopob, sai_correo, sai_sexo, sai_telefono", "saime", "'$plantcodigo',current_date,'$cedula', '$nombre', '$apellido', '$fecnac', '$tipo', '$correo', '$sexo', '$telefono'");
 }
 /*UPDATE*/
 if($editar == 1 and $cedula !="" and $codigo!=""){
-    $fecha = paraTodos::deconvertDate($fecha);    
-    paraTodos::arrayUpdate("ren_plancodigo='$plantcodigo',ren_cedula='$cedula', ren_nombre='$nombre', ren_apellido='$apellido', ren_nacional='$nacional', ren_anual='$anual', ren_universidad='$universidad', ren_carrera='$carrera', ren_motivo='$motivo', ren_fecha='$fecha', ren_recepced='$cedrecp', ren_recepnom='$nomrecep', ren_recepape='$aperecep', ren_recepestado='$estadorecep'", "renuncia", "ren_codigo=$codigo");
+    $fecha = paraTodos::deconvertDate($fecha);
+    paraTodos::arrayUpdate("sai_plancodigo='$plantcodigo', sai_cedula='$cedula', sai_nombre='$nombre', sai_apellido='$apellido', sai_fecnac='$fecnac', sai_tipopob='$tipo', sai_correo='$correo', sai_sexo='$sexo', sai_telefono='$telefono'", "saime", "sai_codigo=$codigo");
 }
 /*ELIMINAR*/
 if ($eliminar !=''){
-    paraTodos::arrayDelete("ren_codigo=$codigo", "renuncia");
+    paraTodos::arrayDelete("sai_codigo=$codigo", "saime");
     $codigo="";
 }
 /*MOSTRAR*/
 if($editar == 1 and $cedula =="" and $codigo!=""){
-    $consulta = paraTodos::arrayConsulta("*", "renuncia ", "ren_codigo=$codigo");
+    $consulta = paraTodos::arrayConsulta("*", "saime ", "sai_codigo=$codigo");
     foreach($consulta as $row){
-        $plantcodigo = $row[ren_plancodigo];      
-        $cedula = $row[ren_cedula];      
-        $nombre = $row[ren_nombre];      
-        $apellido = $row[ren_apellido];      
-        $nacional = $row[ren_nacional];      
-        $anual = $row[ren_anual];      
-        $universidad = $row[ren_universidad];      
-        $carrera = $row[ren_carrera];      
-        $estadorecep = $row[ren_recepestado];      
-        $motivo = $row[ren_motivo];      
-        $fecha = $row[ren_fecha];      
-        $cedrecep = $row[ren_recepced];      
-        $nomrecep = $row[ren_recepnom];      
-        $aperecep = $row[ren_recepape];
+        $cedula = $row[sai_cedula];      
+        $nombre = $row[sai_nombre];      
+        $apellido = $row[sai_apellido];
+        $fecnac = $row[sai_fecnac];
+        $sexo = $row[sai_sexo];
+        $tipo = $row[sai_tipopob];
+        $correo = $row[sai_correo];
+        $telefono = $row[sai_telefono];
     }
 }
 ?>
     <div class="content">
         <div>
             <div class="page-header-title">
-                <h4 class="page-title">Renuncias</h4> </div>
+                <h4 class="page-title">SAIME</h4> </div>
         </div>
         <div class="page-content-wrapper ">
             <div class="container">
@@ -91,19 +75,14 @@ if($editar == 1 and $cedula =="" and $codigo!=""){
                                                     dmn 	: <?php echo $idMenut;?>,
                                                     codigo 	: $('#codigo').val(),
                                                     plantcodigo : <?php echo $plantcodigo;?>,
-                                                    cedula : $('#cedula').val(),     
-                                                    nombre : $('#nombre').val(),     
-                                                    apellido : $('#apellido').val(),     
-                                                    nacional : $('#nacional').val(),     
-                                                    anual : $('#anual').val(),     
-                                                    universidad : $('#universidad').val(),     
-                                                    carrera : $('#carrera').val(),     
-                                                    estrecep : $('#estadorecep').val(),     
-                                                    motivo : $('#motivo').val(),     
-                                                    fecha : $('#fecha').val(),     
-                                                    cedrecp : $('#cedrecep').val(),     
-                                                    nomrecep : $('#nomrecep').val(),     
-                                                    aperecep : $('#aperecep').val(),
+                                                    cedula : $('#cedula').val(),
+                                                    nombre : $('#nombre').val(),
+                                                    apellido : $('#apellido').val(),
+                                                    fecnac : $('#fecnac').val(),
+                                                    sexo : $('#sexo').val(),
+                                                    tipo : $('#tipo').val(),
+                                                    correo : $('#correo').val(),
+                                                    telefono : $('#telef').val(),
                                                     editar: 1,
                                                     ver 	: 2
                                                     },
@@ -113,80 +92,56 @@ if($editar == 1 and $cedula =="" and $codigo!=""){
                                                     $('#cedula').val('');
                                                     $('#nombre').val('');
                                                     $('#apellido').val('');
-                                                    $('#nacional').val('');
-                                                    $('#anual').val('');
-                                                    $('#universidad').val('');
-                                                    $('#carrera').val('');
-                                                    $('#motivo').val('');
-                                                    $('#fecha').val('');
-                                                    $('#cedrecep').val('');
-                                                    $('#nomrecep').val('');
-                                                    $('#aperecep').val('');
+                                                    $('#fecnac').val('');
+                                                    $('#sexo').val('');
+                                                    $('#tipo').val('');
+                                                    $('#correo').val('');
+                                                    $('#telefono').val('');
                                                     },
                                                     }); return false;">                                     
                                         <div class="row">
                                             <div class="col-sm-2">
-                                                <label class="control-label" for="fecha">Fecha</label>                                                
-                                                <input class="form-control" id="fecha" type="text" value="<?php echo paraTodos::convertDate($fecha); ?>">
-                                            </div>
-                                            <div class="col-sm-2">
                                                 <label class="control-label" for="cedula">Cedula</label>                                                
-                                                <input class="form-control" id="cedula" type="number" value="<?php echo $cedula; ?>" min="0">
+                                                <input class="form-control" id="cedula" type="number" value="<?php echo $cedula; ?>" min="0" required>
                                                 <input class="form-control collapse" id="codigo" type="number" value="<?php echo $codigo; ?>">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label class="control-label" for="nacional">Nacionalidad</label>                                                
-                                                <select class="form-control" id="nacional">
-                                                    <?php
-                                                    combos::CombosSelect("1", "$nacional", "nac_codigo, nac_descripcion", "tools_nacionalidad", "nac_codigo", "nac_descripcion", "1=1");
-                                                    ?>
-                                                </select>
                                             </div>
                                         </div>
                                         <div class="row">                                        
                                             <div class="col-sm-6">
                                                 <label class="control-label" for="nombre">Nombres</label>                                                
-                                                <input class="form-control" id="nombre" type="text" value="<?php echo $nombre;?>">
+                                                <input class="form-control" id="nombre" type="text" value="<?php echo $nombre;?>" required>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label class="control-label" for="apellido">Apellidos</label>                                                
-                                                <input class="form-control" id="apellido" type="text" value="<?php echo $apellido;?>">
+                                                <input class="form-control" id="apellido" type="text" value="<?php echo $apellido;?>" required>
                                             </div>
                                             <div class="col-sm-2">
-                                                <label class="control-label" for="anual">Año</label>                                                
-                                                <input class="form-control" id="anual" type="number" value="<?php echo $anual;?>" min="0">
+                                                <label class="control-label" for="fecnac">Fecha de nacimiento</label>                                                
+                                                <input class="form-control" id="fecnac" type="text" value="<?php echo paraTodos::convertDate($fecnac);?>" required>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label class="control-label" for="sexo">Sexo</label>                                                
+                                                <select class="form-control" id="sexo" required>
+                                                        <?php
+                                                        combos::CombosSelect("1", "$sexo", "id, Nombre", "sexo", "id", "Nombre", "1=1");
+                                                        ?>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label" for="tipo">Tipo de población</label>
+                                                <select class="form-control" id="tipo" required>
+                                                        <?php
+                                                        combos::CombosSelect("1", "$tipo", "tip_codigo, tip_descripcion", "tools_tipopob", "tip_codigo", "tip_descripcion", "1=1");
+                                                        ?>
+                                                </select>
                                             </div>
                                             <div class="col-sm-5">
-                                                <label class="control-label" for="universidad">Universidad</label>                                                
-                                                <input class="form-control" id="universidad" type="text" value="<?php echo $universidad;?>">
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <label class="control-label" for="carrera">Carrera</label>                                                
-                                                <input class="form-control" id="carrera" type="text" value="<?php echo $carrera;?>">
+                                                <label class="control-label" for="correo">Correo</label>                                                
+                                                <input class="form-control" id="correo" type="mail" value="<?php echo $correo;?>" required>
                                             </div>
                                             <div class="col-sm-12">
-                                                <label class="control-label" for="motivo">Motivo</label>                                                
-                                                <input class="form-control" id="motivo" type="text" value="<?php echo $motivo;?>">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label class="control-label" for="cedula">Estado</label>                                                
-                                                    <select class="form-control" id="estadorecep">
-                                                        <?php
-                                                        combos::CombosSelect("1", "$estadorecep", "est_codigo, est_descripcion", "tools_estados", "est_codigo", "est_descripcion", "1=1");
-                                                        ?>
-                                                    </select>
-                                            </div>                                            
-                                            <div class="col-sm-2">
-                                                <label class="control-label" for="cedrecep">Cedula del receptor</label>                                                
-                                                <input class="form-control" id="cedrecep" type="number" value="<?php echo $cedrecep;?>" min="0">
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <label class="control-label" for="nomrecep">Nombre del receptor</label>                                                
-                                                <input class="form-control" id="nomrecep" type="text" value="<?php echo $nomrecep;?>">
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <label class="control-label" for="aperecep">Apellido del receptor</label>                                                
-                                                <input class="form-control" id="aperecep" type="text" value="<?php echo $aperecep;?>">
+                                                <label class="control-label" for="telef">Teléfono</label>                                                
+                                                <input class="form-control" id="telef" type="tel" value="<?php echo $telefono;?>" required>
                                             </div>
                                         </div>
                                         <div class="col-xs-12">
@@ -202,8 +157,11 @@ if($editar == 1 and $cedula =="" and $codigo!=""){
                                                 <td class="text-center"><strong>Cedula</strong></td>
                                                 <td class="text-center"><strong>Nombre</strong></td>
                                                 <td class="text-center"><strong>Apellido</strong></td>
-                                                <td class="text-center"><strong>Universidad</strong></td>
-                                                <td class="text-center"><strong>Carrera</strong></td>
+                                                <td class="text-center"><strong>Sexo</strong></td>
+                                                <td class="text-center"><strong>Fec. Nac.</strong></td>
+                                                <td class="text-center"><strong>Correo</strong></td>
+                                                <td class="text-center"><strong>Teléfono</strong></td>
+                                                <td class="text-center"><strong>Tipo de pob.</strong></td>
                                                 <td class="text-center"><strong>Estatus</strong></td>
                                                 <td class="text-center"><strong>Editar</strong></td>
                                                 <td class="text-center"><strong>Eliminar</strong></td>
@@ -211,27 +169,36 @@ if($editar == 1 and $cedula =="" and $codigo!=""){
                                         </thead>
                                         <tbody>
 <?php
-								            $consulsol = paraTodos::arrayConsulta("*", "renuncia , tools_status", "ren_plancodigo=$plantcodigo and ren_status=st_codigo");
+								            $consulsol = paraTodos::arrayConsulta("*", "saime , tools_status, sexo s", "sai_plancodigo=$plantcodigo and sai_status=st_codigo and sai_sexo=s.id");
 								            foreach($consulsol as $row){
 ?>
                                             <tr>
                                                 <td class="text-center">
-                                                    <?php echo $row[ren_codigo];?>
+                                                    <?php echo $row[sai_codigo];?>
                                                 </td>
                                                 <td class="text-center">
-                                                    <?php echo $row[ren_cedula];?>
+                                                    <?php echo $row[sai_cedula];?>
                                                 </td>
                                                 <td class="text-center">
-                                                    <?php echo $row[ren_nombre];?>
+                                                    <?php echo $row[sai_nombre];?>
                                                 </td>
                                                 <td class="text-center">
-                                                    <?php echo $row[ren_apellido];?>
+                                                    <?php echo $row[sai_apellido];?>
                                                 </td>
                                                 <td class="text-center">
-                                                    <?php echo $row[ren_universidad];?>
+                                                    <?php echo $row[sai_sexo];?>
                                                 </td>
                                                 <td class="text-center">
-                                                    <?php echo $row[ren_carrera];?>
+                                                    <?php echo $row[sai_fecnac];?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $row[sai_correo];?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $row[sai_telefono];?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $row[sai_tipopob];?>
                                                 </td>
                                                 <td class="text-center">
                                                     <?php echo $row[st_descripcion];?>
@@ -242,7 +209,7 @@ if($editar == 1 and $cedula =="" and $codigo!=""){
                                                         type:'POST',
                                                         data:{
                                                             dmn 	: <?php echo $idMenut;?>,
-                                                            codigo 	: <?php echo $row[ren_codigo];?>,
+                                                            codigo 	: <?php echo $row[sai_codigo];?>,
                                                             editar 	: 1,
                                                             ver 	: 2
                                                         },
@@ -254,14 +221,14 @@ if($editar == 1 and $cedula =="" and $codigo!=""){
                                                 </td>
                                                 <td class="text-center">
                                                 <?php
-                                                    if($row[ren_status]==1 or $row[ren_status]==4){
+                                                    if($row[sai_status]==1 or $row[sai_status]==4){
                                                 ?>                                                    
                                                     <a href="javascript:void(0);" onclick="$.ajax({
                                                         url:'accion.php',
                                                         type:'POST',
                                                         data:{
                                                             dmn 	: <?php echo $idMenut;?>,
-                                                            codigo 	: <?php echo $row[ren_codigo];?>,
+                                                            codigo 	: <?php echo $row[sai_codigo];?>,
                                                             eliminar : 1,
                                                             ver 	: 2
                                                         },
@@ -309,7 +276,7 @@ if($editar == 1 and $cedula =="" and $codigo!=""){
                         columns: ':visible'
                     },
                     customize: function (win) {
-                        $(win.document.body).css('font-size', '8pt').prepend('<div><h4 style="text-align:center">Renuncias</h4></div>');
+                        $(win.document.body).css('font-size', '8pt').prepend('<div><h4 style="text-align:center">Casos SAIME registrados</h4></div>');
                         $(win.document.body).find('table').addClass('compact').css('font-size', 'inherit');
                     }
                 },

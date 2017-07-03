@@ -78,22 +78,24 @@ CREATE TABLE IF NOT EXISTS `m_menu_emp_sub_menj` (
   PRIMARY KEY (`id`),
   KEY `enlace` (`enlace`),
   CONSTRAINT `m_menu_emp_sub_menj_ibfk_1` FOREIGN KEY (`enlace`) REFERENCES `m_menu_emp_menj` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla fundacite_opsu.m_menu_emp_sub_menj: ~9 rows (aproximadamente)
+-- Volcando datos para la tabla fundacite_opsu.m_menu_emp_sub_menj: ~12 rows (aproximadamente)
 DELETE FROM `m_menu_emp_sub_menj`;
 /*!40000 ALTER TABLE `m_menu_emp_sub_menj` DISABLE KEYS */;
 INSERT INTO `m_menu_emp_sub_menj` (`id`, `enlace`, `enlacesub`, `Act`, `orden`, `menu`, `conex`, `Url_1`, `Url_2`, `Url_3`, `Url_4`, `Url_5`, `Url_6`, `Url_7`, `Url_8`, `Url_9`, `Url_10`, `Inserte`, `Updated`, `Deleted`, `Acciones`, `Ejecutar`, `conexd`, `funcion`, `nivel`, `CA`, `CAdmin`, `CssColor`, `CssImagen`) VALUES
 	(1, 54, NULL, NULL, NULL, 'Usuarios', 'menu.php', 'conf_usuario/crear_usuario.php', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
 	(2, 54, NULL, NULL, NULL, 'Administrar Perfiles', 'menu.php', 'admin_perfil/conf_perfil.php', 'admin_perfil/conf_menu_list.php', 'admin_perfil/conf_menu_accion.php', '', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
 	(3, 55, NULL, NULL, NULL, 'Planteles', NULL, 'sistema/plantel/plantel.php', '', '', '', '', NULL, NULL, NULL, NULL, 'sistema/plantel/recargar.php', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
-	(4, 56, NULL, NULL, NULL, 'Eliminación', NULL, 'sistema/eliminacion/elimina.php', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
-	(5, 56, NULL, NULL, NULL, 'Desbloqueo', NULL, 'sistema/desbloqueo/desblo.php', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
-	(6, 56, NULL, NULL, NULL, 'Renuncia', NULL, 'sistema/renuncia/renuncia.php', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
+	(4, 56, NULL, NULL, NULL, 'Eliminación', NULL, 'sistema/eliminacion/elimina.php', 'sistema/eliminacion/formato.php', '', '', '', NULL, NULL, NULL, NULL, 'sistema/desbloqueo/recargar.php', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
+	(5, 56, NULL, NULL, NULL, 'Desbloqueo', NULL, 'sistema/desbloqueo/desblo.php', 'sistema/desbloqueo/formato.php', '', '', '', NULL, NULL, NULL, NULL, 'sistema/desbloqueo/recargar.php', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
+	(6, 56, NULL, NULL, NULL, 'Renuncia', NULL, 'sistema/renuncia/renuncia.php', 'sistema/renuncia/formato.php', '', '', '', NULL, NULL, NULL, NULL, 'sistema/renuncia/recargar.php', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
 	(8, 55, NULL, NULL, NULL, 'Personal', NULL, 'sistema/personal/personal.php', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
 	(9, 57, NULL, NULL, NULL, 'Eliminación', NULL, 'sistema/plantel/eliminacion/elimina.php', '', '', '', '', NULL, NULL, NULL, NULL, 'sistema/plantel/eliminacion/recargar.php', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
 	(11, 57, NULL, NULL, NULL, 'Desbloqueo', NULL, 'sistema/plantel/desbloqueo/desblo.php', '', '', '', '', NULL, NULL, NULL, NULL, 'sistema/plantel/desbloqueo/recargar.php', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
-	(12, 57, NULL, NULL, NULL, 'Renuncia', NULL, 'sistema/plantel/renuncia/renuncia.php', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '');
+	(12, 57, NULL, NULL, NULL, 'Renuncia', NULL, 'sistema/plantel/renuncia/renuncia.php', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
+	(13, 57, NULL, NULL, NULL, 'SAIME', NULL, 'sistema/plantel/saime/saime.php', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
+	(15, 56, NULL, NULL, NULL, 'SAIME', NULL, 'sistema/saime/saime.php', '', '', '', '', NULL, NULL, NULL, NULL, 'sistema/saime/recargar.php', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '');
 /*!40000 ALTER TABLE `m_menu_emp_sub_menj` ENABLE KEYS */;
 
 
@@ -135,9 +137,9 @@ CREATE TABLE IF NOT EXISTS `perfiles_det` (
   CONSTRAINT `perfiles_det_ibfk_1` FOREIGN KEY (`IdPerfil`) REFERENCES `perfiles` (`CodPerfil`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `perfiles_det_ibfk_2` FOREIGN KEY (`Menu`) REFERENCES `m_menu_emp_menj` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `perfiles_det_ibfk_3` FOREIGN KEY (`Submenu`) REFERENCES `m_menu_emp_sub_menj` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla fundacite_opsu.perfiles_det: ~30 rows (aproximadamente)
+-- Volcando datos para la tabla fundacite_opsu.perfiles_det: ~32 rows (aproximadamente)
 DELETE FROM `perfiles_det`;
 /*!40000 ALTER TABLE `perfiles_det` DISABLE KEYS */;
 INSERT INTO `perfiles_det` (`id`, `IdPerfil`, `Submenu`, `Menu`, `S`, `U`, `D`, `I`, `P`) VALUES
@@ -149,15 +151,15 @@ INSERT INTO `perfiles_det` (`id`, `IdPerfil`, `Submenu`, `Menu`, `S`, `U`, `D`, 
 	(10, 1, 4, 56, 1, 0, 0, 0, 0),
 	(11, 1, 6, 56, 1, 0, 0, 0, 0),
 	(12, 1, 3, 55, 1, 0, 0, 0, 0),
-	(13, 1, 8, 55, 1, 0, 0, 0, 0),
+	(13, 1, 8, 55, 0, 0, 0, 0, 0),
 	(14, 2, 5, 56, 1, 0, 0, 0, 0),
 	(15, 2, 4, 56, 1, 0, 0, 0, 0),
 	(16, 2, 6, 56, 1, 0, 0, 0, 0),
 	(17, 2, 8, 55, 1, 0, 0, 0, 0),
 	(18, 2, 3, 55, 1, 0, 0, 0, 0),
-	(19, 3, 5, 56, 0, 0, 0, 1, 0),
-	(20, 3, 4, 56, 0, 0, 0, 1, 0),
-	(26, 3, 6, 56, 0, 0, 0, 1, 0),
+	(19, 3, 5, 56, 0, 0, 0, 0, 0),
+	(20, 3, 4, 56, 0, 0, 0, 0, 0),
+	(26, 3, 6, 56, 0, 0, 0, 0, 0),
 	(31, 4, 5, 56, 1, 0, 0, 0, 0),
 	(32, 4, 4, 56, 1, 0, 0, 0, 0),
 	(33, 4, 6, 56, 1, 0, 0, 0, 0),
@@ -170,7 +172,9 @@ INSERT INTO `perfiles_det` (`id`, `IdPerfil`, `Submenu`, `Menu`, `S`, `U`, `D`, 
 	(47, 2, 12, 57, 1, 0, 0, 0, 0),
 	(48, 3, 11, 57, 1, 0, 0, 0, 0),
 	(49, 3, 9, 57, 1, 0, 0, 0, 0),
-	(50, 3, 12, 57, 1, 0, 0, 0, 0);
+	(50, 3, 12, 57, 1, 0, 0, 0, 0),
+	(52, 3, 13, 57, 1, 0, 0, 0, 0),
+	(53, 4, 15, 56, 1, 0, 0, 0, 0);
 /*!40000 ALTER TABLE `perfiles_det` ENABLE KEYS */;
 
 
@@ -184,13 +188,11 @@ CREATE TABLE IF NOT EXISTS `personal` (
   `per_telefono` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`per_codigo`),
   UNIQUE KEY `per_cedula` (`per_cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- Volcando datos para la tabla fundacite_opsu.personal: ~0 rows (aproximadamente)
 DELETE FROM `personal`;
 /*!40000 ALTER TABLE `personal` DISABLE KEYS */;
-INSERT INTO `personal` (`per_codigo`, `per_cedula`, `per_nombres`, `per_apellidos`, `per_correo`, `per_telefono`) VALUES
-	(3, 19191493, 'lilia amanda ', 'ROJAS', 'KARPOFV.89@GMAIL.COM', '04124289536');
 /*!40000 ALTER TABLE `personal` ENABLE KEYS */;
 
 
@@ -625,17 +627,16 @@ CREATE TABLE IF NOT EXISTS `registrados` (
   `sexo` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `correo` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `cedula` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  UNIQUE KEY `cedula` (`cedula`),
+  CONSTRAINT `FK_registrados_usuarios` FOREIGN KEY (`cedula`) REFERENCES `usuarios` (`Cedula`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla fundacite_opsu.registrados: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla fundacite_opsu.registrados: ~2 rows (aproximadamente)
 DELETE FROM `registrados`;
 /*!40000 ALTER TABLE `registrados` DISABLE KEYS */;
 INSERT INTO `registrados` (`id`, `nacionalidad`, `Usuario`, `cedula`, `Nombres`, `Apellidos`, `sexo`, `correo`) VALUES
-	(1, '', 0, 12345, 'laya', 'juan', '', ''),
-	(2, '', 0, 21589306, 'Maria', 'Fernandez', '', ''),
-	(3, '', 0, 19191493, 'gabriel', 'rojas', '', ''),
-	(4, '', 0, 19191492, 'sadasd', 'asdas', '', '');
+	(5, '', 0, 123123, 'Administrador', 'opsu', '', ''),
+	(6, '', 0, 123321, 'Opsu', 'Operador', '', '');
 /*!40000 ALTER TABLE `registrados` ENABLE KEYS */;
 
 
@@ -656,8 +657,9 @@ CREATE TABLE IF NOT EXISTS `renuncia` (
   `ren_recepced` int(11) DEFAULT NULL,
   `ren_recepnom` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `ren_recepape` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `ren_recepestado` int(11) DEFAULT NULL,
   `ren_status` int(11) NOT NULL DEFAULT '1',
-  `ren_notifi` int(11) DEFAULT '0',
+  `ren_notifi` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ren_codigo`),
   UNIQUE KEY `ren_cedula` (`ren_carrera`,`ren_universidad`,`ren_cedula`),
   KEY `FK_renuncia_tools_nacionalidad` (`ren_nacional`),
@@ -666,13 +668,11 @@ CREATE TABLE IF NOT EXISTS `renuncia` (
   CONSTRAINT `FK_renuncia_plantel` FOREIGN KEY (`ren_plancodigo`) REFERENCES `plantel` (`plant_codigo`),
   CONSTRAINT `FK_renuncia_tools_nacionalidad` FOREIGN KEY (`ren_nacional`) REFERENCES `tools_nacionalidad` (`nac_codigo`),
   CONSTRAINT `FK_renuncia_tools_status` FOREIGN KEY (`ren_status`) REFERENCES `tools_status` (`st_codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- Volcando datos para la tabla fundacite_opsu.renuncia: ~1 rows (aproximadamente)
 DELETE FROM `renuncia`;
 /*!40000 ALTER TABLE `renuncia` DISABLE KEYS */;
-INSERT INTO `renuncia` (`ren_codigo`, `ren_fecreg`, `ren_plancodigo`, `ren_cedula`, `ren_nombre`, `ren_apellido`, `ren_nacional`, `ren_anual`, `ren_universidad`, `ren_carrera`, `ren_motivo`, `ren_fecha`, `ren_recepced`, `ren_recepnom`, `ren_recepape`, `ren_status`, `ren_notifi`) VALUES
-	(5, '2017-06-24', 2, 19191493, 'lilia amandas', 'ROJAS', 1, 2017, 'unellez', 'informatica', 'por que si', '0000-00-00', 12204111, 'edgar', 'gomez', 1, 1);
 /*!40000 ALTER TABLE `renuncia` ENABLE KEYS */;
 
 
@@ -703,15 +703,42 @@ CREATE TABLE IF NOT EXISTS `rsni` (
   CONSTRAINT `FK_rsni_c_estados` FOREIGN KEY (`reg_recepestado`) REFERENCES `tools_estados` (`est_codigo`),
   CONSTRAINT `FK_rsni_plantel` FOREIGN KEY (`reg_plancodigo`) REFERENCES `plantel` (`plant_codigo`),
   CONSTRAINT `FK_rsni_tools_status` FOREIGN KEY (`reg_status`) REFERENCES `tools_status` (`st_codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Volcando datos para la tabla fundacite_opsu.rsni: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla fundacite_opsu.rsni: ~1 rows (aproximadamente)
 DELETE FROM `rsni`;
 /*!40000 ALTER TABLE `rsni` DISABLE KEYS */;
-INSERT INTO `rsni` (`reg_codigo`, `reg_plancodigo`, `reg_fecreg`, `reg_cedula`, `reg_nombres`, `reg_apellidos`, `reg_caso`, `reg_correo`, `reg_telefono`, `reg_fechaexp`, `reg_consigplan`, `reg_consigced`, `reg_recpnombre`, `reg_recepapellido`, `reg_recepcedula`, `reg_recepestado`, `reg_status`, `reg_notifi`) VALUES
-	(3, 2, '2017-06-25', 19191493, 'lilia amandas', 'ROJAS', 'DESBLOQUEO', 'karpofv.89@gmail.com', '04124289536', '2017-06-21', 1, 0, 'edgar', 'gomez', 12204111, 6, 1, 1),
-	(4, 2, '2017-06-25', 19191492, 'LILIA AMANDA', 'ROJAS', 'ELIMINACION', 'karpofv.89@gmail.com', '04124289536', '2017-06-21', 1, 2, 'edgar', 'gomez', 12204111, 1, 1, 1);
 /*!40000 ALTER TABLE `rsni` ENABLE KEYS */;
+
+
+-- Volcando estructura para tabla fundacite_opsu.saime
+CREATE TABLE IF NOT EXISTS `saime` (
+  `sai_codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `sai_plancodigo` int(11) NOT NULL DEFAULT '0',
+  `sai_fecreg` date NOT NULL,
+  `sai_cedula` int(11) NOT NULL DEFAULT '0',
+  `sai_nombre` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `sai_apellido` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `sai_fecnac` date NOT NULL,
+  `sai_tipopob` int(11) NOT NULL DEFAULT '0',
+  `sai_correo` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `sai_sexo` int(11) NOT NULL DEFAULT '0',
+  `sai_telefono` varchar(250) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `sai_notifi` int(11) NOT NULL DEFAULT '0',
+  `sai_status` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`sai_codigo`),
+  KEY `FK_saime_tools_status` (`sai_status`),
+  KEY `FK_saime_sexo` (`sai_sexo`),
+  KEY `FK_saime_plantel` (`sai_plancodigo`),
+  CONSTRAINT `FK_saime_plantel` FOREIGN KEY (`sai_plancodigo`) REFERENCES `plantel` (`plant_codigo`),
+  CONSTRAINT `FK_saime_sexo` FOREIGN KEY (`sai_sexo`) REFERENCES `sexo` (`id`),
+  CONSTRAINT `FK_saime_tools_status` FOREIGN KEY (`sai_status`) REFERENCES `tools_status` (`st_codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Volcando datos para la tabla fundacite_opsu.saime: ~1 rows (aproximadamente)
+DELETE FROM `saime`;
+/*!40000 ALTER TABLE `saime` DISABLE KEYS */;
+/*!40000 ALTER TABLE `saime` ENABLE KEYS */;
 
 
 -- Volcando estructura para tabla fundacite_opsu.sexo
@@ -2302,13 +2329,29 @@ INSERT INTO `tools_status` (`st_codigo`, `st_descripcion`) VALUES
 /*!40000 ALTER TABLE `tools_status` ENABLE KEYS */;
 
 
+-- Volcando estructura para tabla fundacite_opsu.tools_tipopob
+CREATE TABLE IF NOT EXISTS `tools_tipopob` (
+  `tip_codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `tip_descripcion` varchar(250) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`tip_codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Volcando datos para la tabla fundacite_opsu.tools_tipopob: ~2 rows (aproximadamente)
+DELETE FROM `tools_tipopob`;
+/*!40000 ALTER TABLE `tools_tipopob` DISABLE KEYS */;
+INSERT INTO `tools_tipopob` (`tip_codigo`, `tip_descripcion`) VALUES
+	(1, 'REGULAR'),
+	(2, 'IREGULAR');
+/*!40000 ALTER TABLE `tools_tipopob` ENABLE KEYS */;
+
+
 -- Volcando estructura para tabla fundacite_opsu.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Cedula` int(11) NOT NULL DEFAULT '0',
   `Usuario` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `contrasena` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-  `Tipo` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `Tipo` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Empleado',
   `Nivel` int(11) DEFAULT NULL,
   `Fecha` datetime NOT NULL,
   `Observacion` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2319,13 +2362,12 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   KEY `Cedula` (`Usuario`,`Cedula`),
   KEY `FK_usuarios_perfiles` (`Nivel`),
   CONSTRAINT `FK_usuarios_perfiles` FOREIGN KEY (`Nivel`) REFERENCES `perfiles` (`CodPerfil`)
-) ENGINE=InnoDB AUTO_INCREMENT=377 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=385 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla fundacite_opsu.usuarios: ~372 rows (aproximadamente)
+-- Volcando datos para la tabla fundacite_opsu.usuarios: ~373 rows (aproximadamente)
 DELETE FROM `usuarios`;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` (`id`, `Cedula`, `Usuario`, `contrasena`, `Tipo`, `Nivel`, `Fecha`, `Observacion`) VALUES
-	(1, 19191493, 'ROJASGB', 'a1b995eb2627f17bfd5fcb1de8533c62', 'Empleado', 1, '2016-11-16 09:34:10', NULL),
 	(2, 12345, 'GOD', 'a1b995eb2627f17bfd5fcb1de8533c62', 'Empleado', 2, '0000-00-00 00:00:00', NULL),
 	(4, 610101001, '610101001', '05b44cf25054162df869c99816b13728', 'Empleado', 3, '2017-06-11 00:00:00', ''),
 	(5, 610101501, '610101501', 'ddbc62936eacd0ba2a78f5ad211d7562', 'Empleado', 3, '2017-06-11 00:00:00', ''),
@@ -2697,7 +2739,9 @@ INSERT INTO `usuarios` (`id`, `Cedula`, `Usuario`, `contrasena`, `Tipo`, `Nivel`
 	(373, 611203001, '611203001', 'e37f403c4bcb290927acff0688e9379a', 'Empleado', 3, '2017-06-11 00:00:00', ''),
 	(374, 611203002, '611203002', '1a03c02c74703687532c0e7c5ae4439a', 'Empleado', 3, '2017-06-11 00:00:00', ''),
 	(375, 611203003, '611203003', 'c92f3bfd176d6fd7ab8a003899772b2a', 'Empleado', 3, '2017-06-11 00:00:00', ''),
-	(376, 611204502, '611204502', '23fdafe5262074eed5cf860d5f6461ae', 'Empleado', 3, '2017-06-11 00:00:00', '');
+	(376, 611204502, '611204502', 'a1b995eb2627f17bfd5fcb1de8533c62', 'Empleado', 3, '2017-06-11 00:00:00', ''),
+	(383, 123123, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Empleado', 1, '0000-00-00 00:00:00', NULL),
+	(384, 123321, 'operador', '06d4f07c943a4da1c8bfe591abbc3579', 'Empleado', 4, '0000-00-00 00:00:00', NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 
